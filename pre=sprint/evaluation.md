@@ -29,6 +29,8 @@ testStack.addToStorage('piano');
 
 a) Work out what happens when `testStack.addToStorage` is invoked in order to add the "piano" to storage
 
+Will throw an error because push function isn't defined
+
 ---
 
 &nbsp;
@@ -46,8 +48,14 @@ const secondPerson = new Person('Alice', 500);
 ```
 
 a) What value does `firstPerson` store ?</br>
+ undefined because we are not using the new key word 
+
 b) What value does `secondPerson` store ?</br>
+{name:'Alice', age: 500}
+
 c) What does `this` point to when `Person` is invoked with the `new` keyword.
+
+the object created by the constructor 
 
 ---
 
@@ -71,14 +79,14 @@ const testAccount = new Account('Jane');
 For each of the following expressions below, identify whether they will evaluate to **true** or **false**.</br>
 You must also try and provide justifications for your answers - feel free to lookup methods and operators online to help you work out your answers.
 
-a) `testAccount.hasOwnProperty('Jane');`</br>
-b) `testAccount.hasOwnProperty('name');`</br>
-c) `'name' in testAccount`</br>
-d) `testAccount.hasOwnProperty('addToBasket')`</br>
-e) `'addToBasket' in testAccount`</br>
-f) `testAccount.addToBasket === Account.prototype.addToBasket`</br>
-g) `Object.getPrototypeOf(testAccount) === Account`</br>
-h) `Object.getPrototypeOf(testAccount) === Account.prototype`
+a) `testAccount.hasOwnProperty('Jane');`false</br> 
+b) `testAccount.hasOwnProperty('name');`true</br>
+c) `'name' in testAccount` true</br>
+d) `testAccount.hasOwnProperty('addToBasket')` false </br>
+e) `'addToBasket' in testAccount` true</br>
+f) `testAccount.addToBasket === Account.prototype.addToBasket` true </br>
+g) `Object.getPrototypeOf(testAccount) === Account` false</br>
+h) `Object.getPrototypeOf(testAccount) === Account.prototype` true
 
 Once you've had a go at answer these you can run the code with `node` to see if you were right.
 
@@ -92,9 +100,23 @@ Write a **test case (or test cases) only** below to assert that an `Animal` cons
 const sammy = new Animal('Samuel', 'snake');
 
 // sammy should be an object with the following form:
-
 // {
 //   name: 'Samuel',
 //   species: 'snake;
 //  }
+
+describe('sammy', () => {
+    test('has property name', () => {
+        expect(sammy).toHaveProperty('name')
+    })
+    test('snake is called Samuel', () => {
+        expect(sammy.name).toBe('Samuel')
+    })
+    test('has property species', () => {
+        expect(sammy).toHaveProperty('species')
+    })
+    test('sammy is a snake ', () => {
+        expect(sammy.species).toBe('snake')
+    })
+})
 ```
