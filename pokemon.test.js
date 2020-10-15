@@ -92,9 +92,9 @@ describe('Create Trainer', () => {
     test('pokebelt cannot hold more than 6 pokemon', () => {
         const testPoke1 = new Pokemon('eevee', 58, 7, 'rawr', 'quick attack');
         const testPoke2 = new Pokemon('vaporeon', 60, 9, 'glug', 'bubblebeam', 'water');
-        const testPoke3 = new Pokemon('leafeon', 68, 10, 'tweet', 'vine whipe', 'plant');
+        const testPoke3 = new Pokemon('leafeon', 68, 10, 'tweet', 'vine whipe', 'grass');
         const testPoke4 = new Pokemon('flareon', 63, 11, 'fireeee', 'flamethrower', 'fire');
-        const testPoke5 = new Pokemon('bulbasaur', 65, 9, 'BULBA', 'razor leaf', 'plant');
+        const testPoke5 = new Pokemon('bulbasaur', 65, 9, 'BULBA', 'razor leaf', 'grass');
         const testPoke6 = new Pokemon('charmander', 67, 7, 'CHAR', 'ember', 'fire');
         const testPoke7 = new Pokemon('goldeen', 60, 0, 'BLURP', 'splash', 'water');
         const testTrainer = new Trainer('Bella');
@@ -119,16 +119,26 @@ describe('BATTLE TIME', () => {
         const trainerOne = new Trainer('Bella');
         const trainerTwo = new Trainer('Sam');
         const battleTime = new Battle(trainerOne, trainerTwo);
-        expect(typeof battleTime.trainerOne).toBe('object');
-        expect(typeof battleTime.trainerTwo).toBe('object');
+        expect(battleTime.trainerOne instanceof Trainer).toBe(true);
+        expect(battleTime.trainerTwo instanceof Trainer).toBe(true);
     });
-    test('battle has property pokeOne and pokeTwo which are pokemon', () => {
+    test.only('battle has property pokeOne and pokeTwo which are pokemon', () => {
         const trainerOne = new Trainer('Bella');
         const trainerTwo = new Trainer('Sam');
         const pokeOne = new Pokemon('charmander', 67, 7, 'CHAR', 'ember', 'fire');
-        const pokeTwo = new Pokemon('bulbasaur', 65, 9, 'BULBA', 'razor leaf', 'plant');
-        const battleTime = new Battle(trainerOne, trainerTwo, pokeOne, pokeTwo);
+        const pokeTwo = new Pokemon('bulbasaur', 65, 9, 'BULBA', 'razor leaf', 'grass');
+        trainerOne.catch(pokeOne)
+        trainerTwo.catch(pokeTwo)
+        const battleTime = new Battle(trainerOne, trainerTwo, 'charmander', 'bulbasaur');
         expect(typeof battleTime.pokeOne).toBe('object');
         expect(typeof battleTime.pokeTwo).toBe('object');
     });
+    test('when pokeOne attacks ', () => {
+        const trainerOne = new Trainer('Bella');
+        const trainerTwo = new Trainer('Sam');
+        const att = new Pokemon('charmander', 67, 7, 'CHAR', 'ember', 'fire');
+        const def = new Pokemon('bulbasaur', 65, 9, 'BULBA', 'razor leaf', 'grass');
+        const battleTime = new Battle(trainerOne, trainerTwo, att, def);
+        battleTime.attack(att, def);
+    })
 });
