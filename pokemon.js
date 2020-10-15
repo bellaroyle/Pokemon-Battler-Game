@@ -15,5 +15,24 @@ Pokemon.prototype.useYourMoves = function () {
     return this.move;
 }
 
+function Trainer(name) {
+    this.name = name;
+    this.pokeBelt = [];
+}
 
-module.exports = Pokemon;
+Trainer.prototype.catch = function (pokemon) {
+    if (this.pokeBelt.length < 6) {
+        this.pokeBelt.push(pokemon);
+    }
+    else return 'NO WAY PAL DONT GET GREEDY'
+}
+
+function Battle(trainerOne, trainerTwo, pokeOne, pokeTwo) {
+    this.trainerOne = trainerOne;
+    this.trainerTwo = trainerTwo;
+    this.pokeOne = pokeOne;
+    this.pokeTwo = pokeTwo;
+}
+
+
+module.exports = { Pokemon, Trainer, Battle };
