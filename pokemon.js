@@ -31,6 +31,9 @@ class Pokemon {
 // Pokemon.prototype.compare = function(pokeOne) {
 //     if (pokeOne.type === 'grass')
 // }
+const charmander = new Pokemon('charmander', 30, 8, 'CHAR', 'ember', 'fire');
+const bulbasaur = new Pokemon('bulbasaur', 30, 8, 'BULBA', 'razor leaf', 'grass');
+const squirtle = new Pokemon('squirtle', 30, 8, 'SQUIRTLE', 'bubblebeam', 'water');
 
 class Trainer {
     constructor(name) {
@@ -38,6 +41,7 @@ class Trainer {
         this.pokeBelt = [];
     }
     catch(pokemon) {
+
         if (this.pokeBelt.length < 6) {
             this.pokeBelt.push(pokemon);
         }
