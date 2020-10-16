@@ -19,5 +19,8 @@
   "homepage": "https://github.com/bellaroyle/fun-pokemon-battler#readme",
   "devDependencies": {
     "jest": "^26.5.3"
+  },
+  "dependencies": {
+    "inquirer": "^7.3.3"
   }
 }

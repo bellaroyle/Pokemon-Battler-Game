@@ -81,17 +81,22 @@ class Battle {
             || pokeOne.type === 'fire' && pokeTwo.type === 'water') {
             newPokeAD = Math.floor(pokeOne.AD * 0.75);
             message = 'It wasn\'t very effective ...'
-        } else { }
-
+        }
+        if (pokeOne.HP === 0 || pokeTwo.HP === 0) {
+            return `Oh No! Your Pokemon Fainted! ${this.trainerOne.name} wins!!`;
+        }
         if (pokeOne.HP > 0 && pokeTwo.HP > 0) {
             pokeTwo.HP = pokeTwo.HP - newPokeAD;
             if (pokeTwo.HP < 0) {
                 pokeTwo.HP = 0;
                 console.log(`Oh No! Your Pokemon Fainted! ${this.trainerOne.name} wins!!`)
-                return `Oh No! Your Pokemon Fainted! ${this.trainerOne.name} wins!!`;
+                let pokeFaint = `Oh No! Your Pokemon Fainted! ${this.trainerOne.name} wins!!`;
+                return pokeFaint;
             }
             console.log(`${pokeOne.name} attacked ${pokeTwo.name} with ${pokeOne.move} and dealt ${newPokeAD} damage! ${message}`)
-        } return `${pokeOne.name} attacked ${pokeTwo.name} with ${pokeOne.move} and dealt ${newPokeAD} damage! ${message}`
+            let pokeAttack = `${pokeOne.name} attacked ${pokeTwo.name} with ${pokeOne.move} and dealt ${newPokeAD} damage! ${message}`
+            return pokeAttack;
+        } return pokeFaint;
     }
 }
 /* Takes two Pokemon as inputs -> the first input attacks the second input 

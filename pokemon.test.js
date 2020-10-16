@@ -1,4 +1,6 @@
 
+
+
 const { Pokemon,
     Trainer,
     Battle } = require('./pokemon.js')
@@ -166,7 +168,7 @@ describe('BATTLE TIME', () => {
         battleTime.turn(battleTime.pokeTwo, battleTime.pokeOne);
         expect(pokeOne.HP).toBe(61);
     });
-    test('', () => {
+    test('Create a battle loop test that prints out the message when someone loses', () => {
         const trainerOne = new Trainer('Bella');
         const trainerTwo = new Trainer('Sam');
         const pokeOne = new Pokemon('charmander', 30, 7, 'CHAR', 'ember', 'fire');
@@ -174,17 +176,13 @@ describe('BATTLE TIME', () => {
         trainerOne.catch(pokeOne);
         trainerTwo.catch(pokeTwo);
         const battleTime = new Battle(trainerOne, trainerTwo, 'charmander', 'bulbasaur');
-        battleTime.turn(battleTime.pokeOne, battleTime.pokeTwo);
-        battleTime.turn(battleTime.pokeTwo, battleTime.pokeOne);
-        battleTime.turn(battleTime.pokeOne, battleTime.pokeTwo);
-        battleTime.turn(battleTime.pokeTwo, battleTime.pokeOne);
-        battleTime.turn(battleTime.pokeOne, battleTime.pokeTwo);
-        battleTime.turn(battleTime.pokeTwo, battleTime.pokeOne);
-        battleTime.turn(battleTime.pokeOne, battleTime.pokeTwo);
+        while (pokeTwo.HP > 0 && pokeOne.HP > 0) {
+            battleTime.turn(battleTime.pokeOne, battleTime.pokeTwo);
+            battleTime.turn(battleTime.pokeTwo, battleTime.pokeOne);
+        }
         console.log(pokeOne.HP, 'pokeOne HP')
         console.log(pokeTwo.HP, 'pokeTwo HP')
-
-
-        //expect(pokeOne.HP).toBe();
+        expect(pokeTwo.HP).toBe(0);
+        expect(battleTime.turn(battleTime.pokeTwo, battleTime.pokeOne)).toBe('Oh No! Your Pokemon Fainted! Bella wins!!')
     });
 });
