@@ -144,4 +144,47 @@ describe('BATTLE TIME', () => {
         battleTime.turn(battleTime.pokeOne, battleTime.pokeTwo);
         expect(pokeTwo.HP).not.toBe(65);
     });
+    test('bulbasaur will lose 1.25 times charmander\'s AD, when charmander attacks', () => {
+        const trainerOne = new Trainer('Bella');
+        const trainerTwo = new Trainer('Sam');
+        const pokeOne = new Pokemon('charmander', 67, 7, 'CHAR', 'ember', 'fire');
+        const pokeTwo = new Pokemon('bulbasaur', 65, 9, 'BULBA', 'razor leaf', 'grass');
+        trainerOne.catch(pokeOne);
+        trainerTwo.catch(pokeTwo);
+        const battleTime = new Battle(trainerOne, trainerTwo, 'charmander', 'bulbasaur');
+        battleTime.turn(battleTime.pokeOne, battleTime.pokeTwo);
+        expect(pokeTwo.HP).toBe(57);
+    });
+    test('charmander will lose 0.75 times bulbasaur\'s AD when bulbasaur attacks', () => {
+        const trainerOne = new Trainer('Bella');
+        const trainerTwo = new Trainer('Sam');
+        const pokeOne = new Pokemon('charmander', 67, 7, 'CHAR', 'ember', 'fire');
+        const pokeTwo = new Pokemon('bulbasaur', 65, 9, 'BULBA', 'razor leaf', 'grass');
+        trainerOne.catch(pokeOne);
+        trainerTwo.catch(pokeTwo);
+        const battleTime = new Battle(trainerOne, trainerTwo, 'charmander', 'bulbasaur');
+        battleTime.turn(battleTime.pokeTwo, battleTime.pokeOne);
+        expect(pokeOne.HP).toBe(61);
+    });
+    test('', () => {
+        const trainerOne = new Trainer('Bella');
+        const trainerTwo = new Trainer('Sam');
+        const pokeOne = new Pokemon('charmander', 30, 7, 'CHAR', 'ember', 'fire');
+        const pokeTwo = new Pokemon('bulbasaur', 30, 9, 'BULBA', 'razor leaf', 'grass');
+        trainerOne.catch(pokeOne);
+        trainerTwo.catch(pokeTwo);
+        const battleTime = new Battle(trainerOne, trainerTwo, 'charmander', 'bulbasaur');
+        battleTime.turn(battleTime.pokeOne, battleTime.pokeTwo);
+        battleTime.turn(battleTime.pokeTwo, battleTime.pokeOne);
+        battleTime.turn(battleTime.pokeOne, battleTime.pokeTwo);
+        battleTime.turn(battleTime.pokeTwo, battleTime.pokeOne);
+        battleTime.turn(battleTime.pokeOne, battleTime.pokeTwo);
+        battleTime.turn(battleTime.pokeTwo, battleTime.pokeOne);
+        battleTime.turn(battleTime.pokeOne, battleTime.pokeTwo);
+        console.log(pokeOne.HP, 'pokeOne HP')
+        console.log(pokeTwo.HP, 'pokeTwo HP')
+
+
+        //expect(pokeOne.HP).toBe();
+    });
 });

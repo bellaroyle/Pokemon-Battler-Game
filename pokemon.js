@@ -13,6 +13,8 @@ class Pokemon {
     useYourMoves() { return this.move };
 }
 
+
+
 // class Fire extends Pokemon {
 //     constructor(type){
 // super
@@ -66,13 +68,30 @@ class Battle {
     */
     turn(pokeOne, pokeTwo) {
         //first input is always going to be the attacking pokemon.
+
+        let newPokeAD = pokeOne.AD;
+        let message = ''
+        if (pokeOne.type === 'grass' && pokeTwo.type === 'water'
+            || pokeOne.type === 'water' && pokeTwo.type === 'fire'
+            || pokeOne.type === 'fire' && pokeTwo.type === 'grass') {
+            newPokeAD = Math.floor(pokeOne.AD * 1.25);
+            message = 'It was super effective!'
+        } else if (pokeOne.type === 'grass' && pokeTwo.type === 'fire'
+            || pokeOne.type === 'water' && pokeTwo.type === 'grass'
+            || pokeOne.type === 'fire' && pokeTwo.type === 'water') {
+            newPokeAD = Math.floor(pokeOne.AD * 0.75);
+            message = 'It wasn\'t very effective ...'
+        } else { }
+
         if (pokeOne.HP > 0 && pokeTwo.HP > 0) {
-            pokeTwo.HP = pokeTwo.HP - pokeOne.AD;
+            pokeTwo.HP = pokeTwo.HP - newPokeAD;
             if (pokeTwo.HP < 0) {
-                pokeTwo.HP === 0;
-                return 'Oh No! Your Pokemon Fainted!';
+                pokeTwo.HP = 0;
+                console.log(`Oh No! Your Pokemon Fainted! ${this.trainerOne.name} wins!!`)
+                return `Oh No! Your Pokemon Fainted! ${this.trainerOne.name} wins!!`;
             }
-        } return `${pokeOne.name} attacked ${pokeTwo.name} and dealt ${pokeOne.AD} damage!`
+            console.log(`${pokeOne.name} attacked ${pokeTwo.name} with ${pokeOne.move} and dealt ${newPokeAD} damage! ${message}`)
+        } return `${pokeOne.name} attacked ${pokeTwo.name} with ${pokeOne.move} and dealt ${newPokeAD} damage! ${message}`
     }
 }
 /* Takes two Pokemon as inputs -> the first input attacks the second input 
