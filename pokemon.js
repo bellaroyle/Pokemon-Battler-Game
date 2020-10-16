@@ -1,48 +1,86 @@
-function Pokemon(name, HP, AD, sound, move, type = 'normal') {
-    this.name = name;
-    this.HP = HP;
-    this.AD = AD;
-    this.sound = sound;
-    this.move = move;
-    this.type = type;
+
+class Pokemon {
+    constructor(name, HP, AD, sound, move, type = 'normal') {
+        this.name = name;
+        this.HP = HP;
+        this.AD = AD;
+        this.sound = sound;
+        this.move = move;
+        this.type = type;
+    }
+
+    talk() { return this.sound };
+    useYourMoves() { return this.move };
 }
 
-Pokemon.prototype.talk = function () {
-    return this.sound;
-}
+// class Fire extends Pokemon {
+//     constructor(type){
+// super
+//     }
+// }
 
-Pokemon.prototype.useYourMoves = function () {
-    return this.move;
-}
 
+// Pokemon.prototype.talk = function () {
+//     return this.sound;
+// }
+// Pokemon.prototype.useYourMoves = function () {
+//     return this.move;
+// }
 // Pokemon.prototype.compare = function(pokeOne) {
 //     if (pokeOne.type === 'grass')
 // }
 
-function Trainer(name) {
-    this.name = name;
-    this.pokeBelt = [];
-}
-
-Trainer.prototype.catch = function (pokemon) {
-    if (this.pokeBelt.length < 6) {
-        this.pokeBelt.push(pokemon);
+class Trainer {
+    constructor(name) {
+        this.name = name;
+        this.pokeBelt = [];
     }
-    else return 'NO WAY PAL DONT GET GREEDY'
+    catch(pokemon) {
+        if (this.pokeBelt.length < 6) {
+            this.pokeBelt.push(pokemon);
+        }
+        else return 'NO WAY PAL DONT GET GREEDY'
+    }
 }
 
-function Battle(trainerOne, trainerTwo, pokeOne, pokeTwo) {
-    this.trainerOne = trainerOne;
-    this.trainerTwo = trainerTwo;
-    console.log(trainerOne)
-    console.log(trainerTwo)
-    this.pokeOne = trainerOne.pokeBelt.find(function (pokemon) {
-        return pokemon.name === pokeOne;
-    });
-    this.pokeTwo = trainerTwo.pokeBelt.find(function (pokemon) {
-        return pokemon.name === pokeTwo;
-    })
+// Trainer.prototype.catch = function (pokemon) {
+//     if (this.pokeBelt.length < 6) {
+//         this.pokeBelt.push(pokemon);
+//     }
+//     else return 'NO WAY PAL DONT GET GREEDY'
+// }
+
+class Battle {
+    constructor(trainerOne, trainerTwo, pokeOne, pokeTwo) {
+        this.trainerOne = trainerOne;
+        this.trainerTwo = trainerTwo;
+        this.pokeOne = trainerOne.pokeBelt.find(function (pokemon) {
+            return pokemon.name === pokeOne;
+        });
+        this.pokeTwo = trainerTwo.pokeBelt.find(function (pokemon) {
+            return pokemon.name === pokeTwo;
+        })
+    }
+    /* Takes two trainers and two strings representing one of the Pokemon in their respective belts
+    Then allows us to access the pokemone we want by their name using the 'find' function
+    */
+    turn(pokeOne, pokeTwo) {
+        //first input is always going to be the attacking pokemon.
+        if (pokeOne.HP > 0 && pokeTwo.HP > 0) {
+            pokeTwo.HP = pokeTwo.HP - pokeOne.AD;
+            if (pokeTwo.HP < 0) {
+                pokeTwo.HP === 0;
+                return 'Oh No! Your Pokemon Fainted!';
+            }
+        } return `${pokeOne.name} attacked ${pokeTwo.name} and dealt ${pokeOne.AD} damage!`
+    }
 }
+/* Takes two Pokemon as inputs -> the first input attacks the second input 
+and takes off a set amount of HP equal to attacking pokemon's AD.
+*/
+
+
+
 // if (pokeOne.type === 'grass' && pokeTwo.type === 'water'
 //     || pokeOne.type === 'water' && pokeTwo.type === 'fire'
 //     || pokeOne.type === 'fire' && pokeTwo.type === 'grass') {
@@ -58,27 +96,7 @@ function Battle(trainerOne, trainerTwo, pokeOne, pokeTwo) {
 //     const newPokeTwoAD = pokeTwo.AD;
 // }
 
-Battle.prototype.turn = function (pokeOne, pokeTwo) {
-    // while (pokeOne.HP > 0 || pokeTwo.HP > 0) {
-    //     let att = pokeOne;
-    //     let def = pokeTwo;
-    //     def.HP = def.HP - att.AD
-    //     console.log(pokeOne)
-    //     console.log(pokeTwo)
-    //     att = pokeTwo;
-    //     def = pokeOne;
-    // }
 
-    //make an attack function & a swap function 
-
-    // in attack function : we do the attack on the HP 
-    // attach a counter to the pokemons hit points that starts out = to parseInt(HP)
-
-    //swap the parameters - if turn is odd, attacker is poke0ne 
-
-
-
-}
 
 
 module.exports = { Pokemon, Trainer, Battle };

@@ -7,40 +7,40 @@ describe('Pokemon properties', () => {
     it('returns an object', () => {
         const testPoke = new Pokemon()
         expect(typeof testPoke).toBe('object')
-    })
+    });
     it('object has property name which takes value of first argument passed', () => {
         const testPoke = new Pokemon('eevee')
         expect(testPoke).toHaveProperty('name')
         expect(testPoke.name).toBe('eevee')
-    })
+    });
     it('pokemon has property HP which takes value of second argument passed', () => {
         const testPoke = new Pokemon('eevee', 58);
         expect(testPoke).toHaveProperty('HP');
         expect(testPoke.HP).toBe(58)
-    })
+    });
     it('pokemon has property AD which takes value of third argument passed', () => {
         const testPoke = new Pokemon('eevee', 58, 7);
         expect(testPoke).toHaveProperty('AD');
         expect(testPoke.AD).toBe(7)
-    })
+    });
     it('pokemon has property sound which takes value of fourth argument passed', () => {
         const testPoke = new Pokemon('eevee', 58, 7, 'rawr');
         expect(testPoke).toHaveProperty('sound');
         expect(testPoke.sound).toBe('rawr')
-    })
+    });
     it('pokemon has property move which takes value of fifth argument passed', () => {
         const testPoke = new Pokemon('eevee', 58, 7, 'rawr', 'quick attack');
         expect(testPoke).toHaveProperty('move');
         expect(testPoke.move).toBe('quick attack')
-    })
+    });
     it('pokemon has property type which takes value of sixth argument passed or defaults to normal if no argument passed', () => {
         const testPoke = new Pokemon('eevee', 58, 7, 'rawr', 'quick attack');
         expect(testPoke).toHaveProperty('type');
         expect(testPoke.type).toBe('normal')
-
         const testPoke2 = new Pokemon('vaporeon', 60, 9, 'glug', 'bubblebeam', 'water');
         expect(testPoke2.type).toBe('water')
-    })
+    });
+
 })
 
 describe('Pokemon Methods', () => {
@@ -122,7 +122,7 @@ describe('BATTLE TIME', () => {
         expect(battleTime.trainerOne instanceof Trainer).toBe(true);
         expect(battleTime.trainerTwo instanceof Trainer).toBe(true);
     });
-    test.only('battle has property pokeOne and pokeTwo which are pokemon', () => {
+    test('battle has property pokeOne and pokeTwo which are pokemon', () => {
         const trainerOne = new Trainer('Bella');
         const trainerTwo = new Trainer('Sam');
         const pokeOne = new Pokemon('charmander', 67, 7, 'CHAR', 'ember', 'fire');
@@ -133,12 +133,15 @@ describe('BATTLE TIME', () => {
         expect(typeof battleTime.pokeOne).toBe('object');
         expect(typeof battleTime.pokeTwo).toBe('object');
     });
-    test('when pokeOne attacks ', () => {
+    test('when pokeOne attacks pokeTwo, pokeTwo loses HP', () => {
         const trainerOne = new Trainer('Bella');
         const trainerTwo = new Trainer('Sam');
-        const att = new Pokemon('charmander', 67, 7, 'CHAR', 'ember', 'fire');
-        const def = new Pokemon('bulbasaur', 65, 9, 'BULBA', 'razor leaf', 'grass');
-        const battleTime = new Battle(trainerOne, trainerTwo, att, def);
-        battleTime.attack(att, def);
-    })
+        const pokeOne = new Pokemon('charmander', 67, 7, 'CHAR', 'ember', 'fire');
+        const pokeTwo = new Pokemon('bulbasaur', 65, 9, 'BULBA', 'razor leaf', 'grass');
+        trainerOne.catch(pokeOne);
+        trainerTwo.catch(pokeTwo);
+        const battleTime = new Battle(trainerOne, trainerTwo, 'charmander', 'bulbasaur');
+        battleTime.turn(battleTime.pokeOne, battleTime.pokeTwo);
+        expect(pokeTwo.HP).not.toBe(65);
+    });
 });
