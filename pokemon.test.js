@@ -1,6 +1,3 @@
-
-
-
 const { Pokemon,
     Trainer,
     Battle } = require('./pokemon.js')
@@ -113,12 +110,7 @@ describe('Create Trainer', () => {
     });
 });
 
-// const trainerOne = new Trainer('Bella');
-// const trainerTwo = new Trainer('Sam');
-// const testPokeOne = new Pokemon('charmander', 67, 7, 'CHAR', 'ember', 'fire');
-// const testPokeTwo = new Pokemon('flareon', 63, 11, 'fireeee', 'flamethrower', 'fire');
-
-describe('BATTLE TIME', () => {
+describe.only('BATTLE TIME', () => {
     test('battle has property trainerOne and trainerTwo which are trainers', () => {
         const trainerOne = new Trainer('Bella');
         const trainerTwo = new Trainer('Sam');
@@ -129,8 +121,8 @@ describe('BATTLE TIME', () => {
     test('battle has property pokeOne and pokeTwo which are pokemon', () => {
         const trainerOne = new Trainer('Bella');
         const trainerTwo = new Trainer('Sam');
-        const pokeOne = new Pokemon('charmander', 67, 7, 'CHAR', 'ember', 'fire');
-        const pokeTwo = new Pokemon('bulbasaur', 65, 9, 'BULBA', 'razor leaf', 'grass');
+        const pokeOne = 'charmander';
+        const pokeTwo = 'bulbasaur';
         trainerOne.catch(pokeOne)
         trainerTwo.catch(pokeTwo)
         const battleTime = new Battle(trainerOne, trainerTwo, 'charmander', 'bulbasaur');
@@ -140,51 +132,64 @@ describe('BATTLE TIME', () => {
     test('when pokeOne attacks pokeTwo, pokeTwo loses HP', () => {
         const trainerOne = new Trainer('Bella');
         const trainerTwo = new Trainer('Sam');
-        const pokeOne = new Pokemon('charmander', 67, 7, 'CHAR', 'ember', 'fire');
-        const pokeTwo = new Pokemon('bulbasaur', 65, 9, 'BULBA', 'razor leaf', 'grass');
+        const pokeOne = 'charmander';
+        const pokeTwo = 'bulbasaur';
         trainerOne.catch(pokeOne);
         trainerTwo.catch(pokeTwo);
+        const HPValue = trainerTwo.pokeBelt[0].HP
         const battleTime = new Battle(trainerOne, trainerTwo, 'charmander', 'bulbasaur');
         battleTime.turn(battleTime.pokeOne, battleTime.pokeTwo);
-        expect(pokeTwo.HP).not.toBe(65);
+        expect(trainerTwo.pokeBelt[0].HP).not.toBe(HPValue);
     });
     test('bulbasaur will lose 1.25 times charmander\'s AD, when charmander attacks', () => {
         const trainerOne = new Trainer('Bella');
         const trainerTwo = new Trainer('Sam');
-        const pokeOne = new Pokemon('charmander', 67, 7, 'CHAR', 'ember', 'fire');
-        const pokeTwo = new Pokemon('bulbasaur', 65, 9, 'BULBA', 'razor leaf', 'grass');
+        const pokeOne = 'charmander';
+        const pokeTwo = 'bulbasaur';
         trainerOne.catch(pokeOne);
         trainerTwo.catch(pokeTwo);
+        const HPValue = trainerTwo.pokeBelt[0].HP
         const battleTime = new Battle(trainerOne, trainerTwo, 'charmander', 'bulbasaur');
         battleTime.turn(battleTime.pokeOne, battleTime.pokeTwo);
-        expect(pokeTwo.HP).toBe(57);
+        expect(trainerTwo.pokeBelt[0].HP).toBe(HPValue - Math.floor((trainerOne.pokeBelt[0].AD) * 1.25));
     });
-    test('charmander will lose 0.75 times bulbasaur\'s AD when bulbasaur attacks', () => {
-        const trainerOne = new Trainer('Bella');
-        const trainerTwo = new Trainer('Sam');
-        const pokeOne = new Pokemon('charmander', 67, 7, 'CHAR', 'ember', 'fire');
-        const pokeTwo = new Pokemon('bulbasaur', 65, 9, 'BULBA', 'razor leaf', 'grass');
+    test('bulbasaur will lose 0.75 times squirtle\'s AD when squirtle attacks', () => {
+        const trainerOne = new Trainer('Sam');
+        const trainerTwo = new Trainer('Bella');
+        const pokeOne = 'squirtle';
+        const pokeTwo = 'bulbasaur';
         trainerOne.catch(pokeOne);
         trainerTwo.catch(pokeTwo);
-        const battleTime = new Battle(trainerOne, trainerTwo, 'charmander', 'bulbasaur');
-        battleTime.turn(battleTime.pokeTwo, battleTime.pokeOne);
-        expect(pokeOne.HP).toBe(61);
+        const HPValue = trainerTwo.pokeBelt[0].HP
+        const battleTime = new Battle(trainerOne, trainerTwo, pokeOne, pokeTwo);
+        battleTime.turn(battleTime.pokeOne, battleTime.pokeTwo);
+        expect(trainerTwo.pokeBelt[0].HP).toBe(HPValue - Math.floor((trainerOne.pokeBelt[0].AD) * 0.75));
     });
-    test('Create a battle loop test that prints out the message when someone loses', () => {
-        const trainerOne = new Trainer('Bella');
-        const trainerTwo = new Trainer('Sam');
-        const pokeOne = new Pokemon('charmander', 30, 7, 'CHAR', 'ember', 'fire');
-        const pokeTwo = new Pokemon('bulbasaur', 30, 9, 'BULBA', 'razor leaf', 'grass');
+    test('bulbasaur will lose eevee\'s AD when eevee attacks', () => {
+        const trainerOne = new Trainer('Sam');
+        const trainerTwo = new Trainer('Bella');
+        const pokeOne = 'eevee';
+        const pokeTwo = 'bulbasaur';
         trainerOne.catch(pokeOne);
         trainerTwo.catch(pokeTwo);
-        const battleTime = new Battle(trainerOne, trainerTwo, 'charmander', 'bulbasaur');
-        while (pokeTwo.HP > 0 && pokeOne.HP > 0) {
-            battleTime.turn(battleTime.pokeOne, battleTime.pokeTwo);
-            battleTime.turn(battleTime.pokeTwo, battleTime.pokeOne);
-        }
-        console.log(pokeOne.HP, 'pokeOne HP')
-        console.log(pokeTwo.HP, 'pokeTwo HP')
-        expect(pokeTwo.HP).toBe(0);
-        expect(battleTime.turn(battleTime.pokeTwo, battleTime.pokeOne)).toBe('Oh No! Your Pokemon Fainted! Bella wins!!')
+        const HPValue = trainerTwo.pokeBelt[0].HP
+        const battleTime = new Battle(trainerOne, trainerTwo, pokeOne, pokeTwo);
+        battleTime.turn(battleTime.pokeOne, battleTime.pokeTwo);
+        expect(trainerTwo.pokeBelt[0].HP).toBe(HPValue - Math.floor(trainerOne.pokeBelt[0].AD));
     });
+    // test.only('Create a battle loop test that prints out the message when someone loses', () => {
+    //     const trainerOne = new Trainer('Bella');
+    //     const trainerTwo = new Trainer('Sam');
+    //     const pokeOne = 'charmander';
+    //     const pokeTwo = 'bulbasaur';
+    //     trainerOne.catch(pokeOne);
+    //     trainerTwo.catch(pokeTwo);
+    //     const battleTime = new Battle(trainerOne, trainerTwo, 'charmander', 'bulbasaur');
+    //     while (trainerTwo.pokeBelt[0].HP > 0 && trainerOne.pokeBelt[0].HP > 0) {
+    //         battleTime.turn(battleTime.pokeOne, battleTime.pokeTwo);
+    //         battleTime.turn(battleTime.pokeTwo, battleTime.pokeOne);
+    //     }
+    //     expect(trainerTwo.pokeBelt[0].HP).toBe(0);
+    //     expect(battleTime.turn(battleTime.pokeTwo, battleTime.pokeOne)).toBe('Oh No! Your Pokemon Fainted! Bella wins!!')
+    // });
 });

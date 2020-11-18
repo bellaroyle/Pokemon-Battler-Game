@@ -15,7 +15,6 @@ const typeRef = {
     rattata: 'normal'
 }
 
-
 class Pokemon {
     constructor(name) {
         // creates a pokemon based on the name passed
@@ -35,7 +34,6 @@ class Pokemon {
     talk() { return this.sound };
     useYourMoves() { return this.move };
 }
-
 class Trainer {
     constructor(name) {
         // create a trainer based on the name passed 
@@ -54,7 +52,6 @@ class Trainer {
         else return 'NO WAY PAL DONT GET GREEDY'
     }
 }
-
 class Battle {
     constructor(trainerOne, trainerTwo, pokeOne, pokeTwo) {
         /* Takes two trainers and two strings representing one of the Pokemon in their respective belts
@@ -95,55 +92,38 @@ class Battle {
             message = 'It was super effective!'
 
             // if pokeOne is weak against PokeTwo
-        } else if (pokeOne.type === weaknessRef[pokeTwo.type]) {
+        } else if (pokeTwo.type === weaknessRef[pokeOne.type]) {
             newPokeAD = Math.floor(pokeOne.AD * 0.75);
             message = 'It wasn\'t very effective ...'
         }
 
         // if one of the pokemon has fainted
-        //|| pokeTwo.HP === 0
-        if (pokeOne.HP === 0) {
-            return `Oh No! Your Pokemon Fainted! ${this.trainerTwo.name} wins!!`;
+        if (pokeOne.HP <= 0) {
+            return `Oh No! ${pokeOne} Fainted! ${this.trainerTwo.name} wins!!`;
+        }
+        else if (pokeTwo.HP <= 0) {
+            return `Oh No! ${pokeTwo} Fainted! ${this.trainerOne.name} wins!!`;
         }
         // if both pokemon are awake, pokeOne attacks 
         if (pokeOne.HP > 0 && pokeTwo.HP > 0) {
             pokeTwo.HP = pokeTwo.HP - newPokeAD;
-
             // if pokeTwo faints after being attacked 
+
             if (pokeTwo.HP < 0) {
                 pokeTwo.HP = 0;
-                let pokeFaint = `Oh No! Your Pokemon Fainted! ${this.trainerOne.name} wins!!`;
+                let pokeAttack = `${pokeOne.name} attacked ${pokeTwo.name} with ${pokeOne.move} and dealt ${newPokeAD} damage! ${message} ${pokeTwo.name} has ${pokeTwo.HP} HP left!!`
+                let pokeFaint = `Oh No! ${pokeTwo.name} Fainted! ${this.trainerOne.name} wins!!`;
+                console.log(pokeAttack)
                 console.log(pokeFaint)
                 return pokeFaint;
             }
-            let pokeAttack = `${pokeOne.name} attacked ${pokeTwo.name} with ${pokeOne.move} and dealt ${newPokeAD} damage! ${message}`
+            let pokeAttack = `${pokeOne.name} attacked ${pokeTwo.name} with ${pokeOne.move} and dealt ${newPokeAD} damage! ${message} ${pokeTwo.name} has ${pokeTwo.HP} HP left!!`
             console.log(pokeAttack)
             return pokeAttack;
-        } return pokeFaint;
+        }
+        return pokeFaint
     }
+
 }
-/* Takes two Pokemon as inputs -> the first input attacks the second input 
-and takes off a set amount of HP equal to attacking pokemon's AD.
-*/
-
-
-
-// if (pokeOne.type === 'grass' && pokeTwo.type === 'water'
-//     || pokeOne.type === 'water' && pokeTwo.type === 'fire'
-//     || pokeOne.type === 'fire' && pokeTwo.type === 'grass') {
-//     const newPokeOneAD = pokeOne.AD * 1.25;
-//     const newPokeTwoAD = pokeTwo.AD * 0.75;
-// } else if (pokeOne.type === 'grass' && pokeTwo.type === 'fire'
-//     || pokeOne.type === 'water' && pokeTwo.type === 'grass'
-//     || pokeOne.type === 'fire' && pokeTwo.type === 'water') {
-//     const newPokeOneAD = pokeOne.AD * 0.75;
-//     const newPokeTwoAD = pokeTwo.AD * 1.25;
-// } else {
-//     const newPokeOneAD = pokeOne.AD;
-//     const newPokeTwoAD = pokeTwo.AD;
-// }
-
-
-
 
 module.exports = { Pokemon, Trainer, Battle };
