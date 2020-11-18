@@ -7,7 +7,7 @@ const { Pokemon,
 
 describe('Pokemon properties', () => {
     it('returns an object', () => {
-        const testPoke = new Pokemon()
+        const testPoke = new Pokemon('eevee')
         expect(typeof testPoke).toBe('object')
     });
     it('object has property name which takes value of first argument passed', () => {
@@ -15,46 +15,48 @@ describe('Pokemon properties', () => {
         expect(testPoke).toHaveProperty('name')
         expect(testPoke.name).toBe('eevee')
     });
-    it('pokemon has property HP which takes value of second argument passed', () => {
-        const testPoke = new Pokemon('eevee', 58);
+    it('pokemon has property HP which is a number between 25 and 35', () => {
+        const testPoke = new Pokemon('eevee');
         expect(testPoke).toHaveProperty('HP');
-        expect(testPoke.HP).toBe(58)
+        expect(testPoke.HP).toBeLessThanOrEqual(35)
+        expect(testPoke.HP).toBeGreaterThanOrEqual(25)
     });
-    it('pokemon has property AD which takes value of third argument passed', () => {
-        const testPoke = new Pokemon('eevee', 58, 7);
+    it('pokemon has property AD which is a number between 6 and 10', () => {
+        const testPoke = new Pokemon('eevee');
         expect(testPoke).toHaveProperty('AD');
-        expect(testPoke.AD).toBe(7)
+        expect(testPoke.AD).toBeLessThanOrEqual(10)
+        expect(testPoke.AD).toBeGreaterThanOrEqual(6)
     });
-    it('pokemon has property sound which takes value of fourth argument passed', () => {
-        const testPoke = new Pokemon('eevee', 58, 7, 'rawr');
+    it('pokemon has property sound which is first 5 letters of name in capitals with a "!"', () => {
+        const testPoke = new Pokemon('eevee');
         expect(testPoke).toHaveProperty('sound');
-        expect(testPoke.sound).toBe('rawr')
+        expect(testPoke.sound).toBe('EEVEE!')
     });
-    it('pokemon has property move which takes value of fifth argument passed', () => {
-        const testPoke = new Pokemon('eevee', 58, 7, 'rawr', 'quick attack');
+    it('pokemon has property move which is its value in in moveRef', () => {
+        const testPoke = new Pokemon('eevee');
         expect(testPoke).toHaveProperty('move');
-        expect(testPoke.move).toBe('quick attack')
+        expect(testPoke.move).toBe('tackle')
     });
-    it('pokemon has property type which takes value of sixth argument passed or defaults to normal if no argument passed', () => {
-        const testPoke = new Pokemon('eevee', 58, 7, 'rawr', 'quick attack');
+    it('pokemon has property type which is its value in typeRef', () => {
+        const testPoke = new Pokemon('eevee');
         expect(testPoke).toHaveProperty('type');
         expect(testPoke.type).toBe('normal')
-        const testPoke2 = new Pokemon('vaporeon', 60, 9, 'glug', 'bubblebeam', 'water');
+        const testPoke2 = new Pokemon('squirtle');
         expect(testPoke2.type).toBe('water')
     });
 
 })
 
 describe('Pokemon Methods', () => {
-    it('talk is a function that returns the pokemons sound', () => {
-        const testPoke = new Pokemon('eevee', 58, 7, 'rawr', 'quick attack');
+    it('talk is a function that returns the pokemon\'s sound', () => {
+        const testPoke = new Pokemon('eevee');
         expect(typeof testPoke.talk).toBe('function')
-        expect(testPoke.talk()).toBe('rawr');
+        expect(testPoke.talk()).toBe('EEVEE!');
     })
     it('useYourMoves is a function that returns their favourite move', () => {
-        const testPoke = new Pokemon('eevee', 58, 7, 'rawr', 'quick attack');
+        const testPoke = new Pokemon('eevee');
         expect(typeof testPoke.useYourMoves).toBe('function')
-        expect(testPoke.useYourMoves()).toBe('quick attack');
+        expect(testPoke.useYourMoves()).toBe('tackle');
     })
 })
 
@@ -78,27 +80,27 @@ describe('Create Trainer', () => {
         expect(typeof testTrainer.catch).toBe('function');
     });
     test('catch pushes pokemon into pokeBelt array', () => {
-        const testPoke1 = new Pokemon('eevee', 58, 7, 'rawr', 'quick attack');
+        const testPoke1 = 'eevee';
         const testTrainer = new Trainer('Bella');
         testTrainer.catch(testPoke1)
-        expect(testTrainer.pokeBelt).toEqual([testPoke1]);
+        expect(testTrainer.pokeBelt[0]).toBeInstanceOf(Pokemon);
     });
     test('catch pushes more than one pokemon into pokeBelt array', () => {
-        const testPoke1 = new Pokemon('eevee', 58, 7, 'rawr', 'quick attack');
-        const testPoke2 = new Pokemon('vaporeon', 60, 9, 'glug', 'bubblebeam', 'water');
+        const testPoke1 = 'eevee';
+        const testPoke2 = 'squirtle';
         const testTrainer = new Trainer('Bella');
         testTrainer.catch(testPoke1);
         testTrainer.catch(testPoke2);
-        expect(testTrainer.pokeBelt).toEqual([testPoke1, testPoke2]);
+        expect(testTrainer.pokeBelt.length).toBe(2);
     });
     test('pokebelt cannot hold more than 6 pokemon', () => {
-        const testPoke1 = new Pokemon('eevee', 58, 7, 'rawr', 'quick attack');
-        const testPoke2 = new Pokemon('vaporeon', 60, 9, 'glug', 'bubblebeam', 'water');
-        const testPoke3 = new Pokemon('leafeon', 68, 10, 'tweet', 'vine whipe', 'grass');
-        const testPoke4 = new Pokemon('flareon', 63, 11, 'fireeee', 'flamethrower', 'fire');
-        const testPoke5 = new Pokemon('bulbasaur', 65, 9, 'BULBA', 'razor leaf', 'grass');
-        const testPoke6 = new Pokemon('charmander', 67, 7, 'CHAR', 'ember', 'fire');
-        const testPoke7 = new Pokemon('goldeen', 60, 0, 'BLURP', 'splash', 'water');
+        const testPoke1 = 'eevee';
+        const testPoke2 = 'vaporeon';
+        const testPoke3 = 'leafeon';
+        const testPoke4 = 'flareon';
+        const testPoke5 = 'bulbasaur';
+        const testPoke6 = 'charmander';
+        const testPoke7 = 'rattata';
         const testTrainer = new Trainer('Bella');
         testTrainer.catch(testPoke1);
         testTrainer.catch(testPoke2);
