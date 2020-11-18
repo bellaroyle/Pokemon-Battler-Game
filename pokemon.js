@@ -30,9 +30,6 @@ class Pokemon {
         this.type = typeRef[name];
         this.move = moveRef[this.type];
     }
-
-    talk() { return this.sound };
-    useYourMoves() { return this.move };
 }
 class Trainer {
     constructor(name) {

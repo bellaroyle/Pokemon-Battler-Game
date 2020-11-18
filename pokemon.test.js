@@ -44,19 +44,6 @@ describe('Pokemon properties', () => {
 
 })
 
-describe('Pokemon Methods', () => {
-    it('talk is a function that returns the pokemon\'s sound', () => {
-        const testPoke = new Pokemon('eevee');
-        expect(typeof testPoke.talk).toBe('function')
-        expect(testPoke.talk()).toBe('EEVEE!');
-    })
-    it('useYourMoves is a function that returns their favourite move', () => {
-        const testPoke = new Pokemon('eevee');
-        expect(typeof testPoke.useYourMoves).toBe('function')
-        expect(testPoke.useYourMoves()).toBe('tackle');
-    })
-})
-
 describe('Create Trainer', () => {
     test('returns an object', () => {
         const testTrainer = new Trainer('Bella');
@@ -110,7 +97,7 @@ describe('Create Trainer', () => {
     });
 });
 
-describe.only('BATTLE TIME', () => {
+describe('BATTLE TIME', () => {
     test('battle has property trainerOne and trainerTwo which are trainers', () => {
         const trainerOne = new Trainer('Bella');
         const trainerTwo = new Trainer('Sam');
@@ -177,19 +164,4 @@ describe.only('BATTLE TIME', () => {
         battleTime.turn(battleTime.pokeOne, battleTime.pokeTwo);
         expect(trainerTwo.pokeBelt[0].HP).toBe(HPValue - Math.floor(trainerOne.pokeBelt[0].AD));
     });
-    // test.only('Create a battle loop test that prints out the message when someone loses', () => {
-    //     const trainerOne = new Trainer('Bella');
-    //     const trainerTwo = new Trainer('Sam');
-    //     const pokeOne = 'charmander';
-    //     const pokeTwo = 'bulbasaur';
-    //     trainerOne.catch(pokeOne);
-    //     trainerTwo.catch(pokeTwo);
-    //     const battleTime = new Battle(trainerOne, trainerTwo, 'charmander', 'bulbasaur');
-    //     while (trainerTwo.pokeBelt[0].HP > 0 && trainerOne.pokeBelt[0].HP > 0) {
-    //         battleTime.turn(battleTime.pokeOne, battleTime.pokeTwo);
-    //         battleTime.turn(battleTime.pokeTwo, battleTime.pokeOne);
-    //     }
-    //     expect(trainerTwo.pokeBelt[0].HP).toBe(0);
-    //     expect(battleTime.turn(battleTime.pokeTwo, battleTime.pokeOne)).toBe('Oh No! Your Pokemon Fainted! Bella wins!!')
-    // });
 });

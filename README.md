@@ -1,42 +1,22 @@
 ## Pokemon Battle Game
 
+- Introduction
 
-Using the Object Oriented Programming skills you've learned this week, we want you to implement a Pokemon battle game!
+Welcome to the wonderful world of Pokemon!
 
-## Day 1
+This is a command line Pokemon battler game created using Object Oriented Programming in ES6 JavaScript to create trainers and their Pokemon.
 
-In day 1 of this sprint you are expected to use the pseudo-classical pattern of object creation in order to create your pokemon, trainer and battle objects.  Remember to think about which properties and methods should belong to each of these different objects.
+Each Pokemon and Trainer was created using Classes. The Pokemon class creates a Pokemon with properties Name, Hit Points(HP), Attack Damage(AD), Sound, Move, and Type when provided the name. The Trainer class creates a trainer with properties Name and Pokebelt, and has a method 'catch' which add Pokemon to the Pokebelt.
 
-## Day 2
+There is also a Battle class which creates a battle arena, with two trainers and two Pokemon. This has a method 'turn', which allows one of the Pokemon to attack the other. The 'turn' method takes into account a Pokemon's strength or weakness against its opponent, multiplying the AD by 1.25 or 0.75 respectively.
 
-In day 2 of this sprint you should re-factor your code to make use of ES6 classes.  Any code that uses the pseudo-classical pattern of object creation should be re-factored into classes.
+Using inquirer.js, a command line method was implemented in order to establish a flow through which the initial stages of the original Pokemon game were followed through, from initial meeting with Professor Oak to the end of the first battle with the player's rival. Upon running away or Pokemon fainting, the game ends.
 
+## Instructions:
 
-## Pokemon
-
-- Each pokemon should have a name, hit points (health), attack damage, the sound that it makes, and one move. (e.g. 'bite')  
-- Each pokemon should have a type property which deafults to normal. Normal pokemon have no strengths or weaknesses.
-- You should be able to create grass pokemon, water pokemon and fire pokemon. 
-- Fire pokemon are strong against grass, and weak against water. Grass pokemon are strong against water, and weak against fire. Water pokemon are strong against fire and weak against grass. 
-- Every pokemon should have a talk method available, which returns its sound.
-- Every pokemon should have a useYourMoves method available, which returns its favourite move.
-
-## Trainer
-- Pokemon trainers will have a name, and a way of storing pokemon. 
-- Each pokemon trainer will also have a catch method available, so they can store more pokemon. 
-
-## Battle
-- Finally, you will need a way to battle the pokemon. 
-- The battle should take two trainers and the names of the pokemon they wish to battle. 
-- The battle should have a fight method available. This should take the pokemon whose turn it is, attack the defending pokemon (deducting attacker's attack damage from the defender's hit points), and end their turn. 
-- The fight method should take each pokemon's strengths and weaknesses into account. If a defender is strong against the attacking type, the attacking type's damage should be multiplied by 0.75. If a defender is weak against the attacking type, the attacking type's damage should be multiplied by 1.25. 
-- Each attack should be followed by an attack message. The message will vary depending on the defender's weakness/strength. 
-- If the defending pokemon faints (depletes all hit points), the attacker wins. 
-
-## Making the game
-Once you have all the necessary parts fully tested, make the game! 
-
-Using the [inquirer library](https://github.com/SBoudrias/Inquirer.js), build a command line application to play your pokemon battle game. The game should be played using inputs and selections. 
+- Fork and clone the repo: ___
+- Run command 'node playpokemon.js' in your terminal.
+- Have fun!
 
 ### Extra Requirements
 - Implement a critical hit, that randomly awards pokemon triple damage.

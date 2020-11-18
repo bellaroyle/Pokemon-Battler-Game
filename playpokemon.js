@@ -1,11 +1,5 @@
-
-// 5. A friendly battle between you and your rival!
-// 6. It's your turn! Do you want to attack?
-// 7. Blah blah blah #fight
-// 8. WOW YOU WIN/WOW YOU LOSE.
-
 'use strict';
-const { Pokemon, Trainer, Battle } = require('./pokemon');
+const { Trainer, Battle } = require('./pokemon');
 const inquirer = require('inquirer');
 
 console.log('IT\'S POKEMON!');
