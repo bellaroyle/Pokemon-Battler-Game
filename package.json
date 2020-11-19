@@ -21,6 +21,7 @@
     "jest": "^26.5.3"
   },
   "dependencies": {
-    "inquirer": "^7.3.3"
+    "inquirer": "^7.3.3",
+    "terminal-image": "^1.2.1"
   }
 }

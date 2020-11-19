@@ -13,6 +13,11 @@ Using inquirer.js, a command line method was implemented in order to establish a
 ## How to play:
 
 - Fork and clone this repository to your computer and open in your code editor. 
-- Run the command 'npm install inquirer', followed by 'node playpokemon.js' in your terminal 
+- Run the following commands in your terminal:
+```
+npm install inquirer
+npm install terminal-image
+node playpokemon.js
+```
 - Answer the initial questions to set up your trainers and pokemon and have fun!
 
