@@ -1,23 +1,8 @@
-const moveRef = {
-    fire: 'ember',
-    grass: 'razor leaf',
-    water: 'bubblebeam',
-    normal: 'tackle'
-}
-const typeRef = {
-    charmander: 'fire',
-    bulbasaur: 'grass',
-    squirtle: 'water',
-    eevee: 'normal',
-    vaporeon: 'water',
-    flareon: 'fire',
-    leafeon: 'grass',
-    rattata: 'normal'
-}
+const { moveRef, typeRef, strengthRef, weaknessRef } = require('./ref-obj')
 
 class Pokemon {
     constructor(name) {
-        // creates a pokemon based on the name passed
+        // this constructor creates a pokemon based on the name passed
 
         this.name = name;
         // creates a random integer between 25 and 30
@@ -40,28 +25,33 @@ class Trainer {
     catch(pokemon) {
         /*
         Takes a string representing the name of a pokemon and creates the pokemon.
-        Adds the created pokemon to the trainers pokebelt
+        Adds the created pokemon to the trainers pokebelt 
+        only allows for a maximum of 6 pokemon 
          */
         if (this.pokeBelt.length < 6) {
             const newPoke = new Pokemon(pokemon)
             this.pokeBelt.push(newPoke);
         }
-        else return 'NO WAY PAL DONT GET GREEDY'
+        else return 'NO WAY PAL DON\'T GET GREEDY'
     }
 }
 class Battle {
     constructor(trainerOne, trainerTwo, pokeOne, pokeTwo) {
         /* Takes two trainers and two strings representing one of the Pokemon in their respective belts
-   Then allows us to access the pokemon we want by their name using the 'find' function
-   */
+        Then allows us to access the pokemon we want by their name using the 'find' function
+        */
         this.trainerOne = trainerOne;
         this.trainerTwo = trainerTwo;
-        this.pokeOne = trainerOne.pokeBelt.find(function (pokemon) {
+        this.pokeOne = trainerOne.pokeBelt.find(pokemon => {
             return pokemon.name === pokeOne;
         });
-        this.pokeTwo = trainerTwo.pokeBelt.find(function (pokemon) {
+        this.pokeTwo = trainerTwo.pokeBelt.find(pokemon => {
             return pokemon.name === pokeTwo;
         })
+
+        // adds trainers name to the pokemon in the pokebelt
+        trainerOne.pokeBelt[0].trainer = trainerOne.name
+        trainerTwo.pokeBelt[0].trainer = trainerTwo.name
     }
 
     turn(pokeOne, pokeTwo) {
@@ -72,55 +62,36 @@ class Battle {
         let newPokeAD = pokeOne.AD;
         let message = ''
 
-        const strengthRef = {
-            grass: 'water',
-            fire: 'grass',
-            water: 'fire'
-        }
-        const weaknessRef = {
-            grass: 'fire',
-            fire: 'water',
-            water: 'grass'
-        }
-
-        // if pokeOne is strong against pokeTwo 
+        // if pokeOne is strong against pokeTwo, attack become more effective 
         if (pokeTwo.type === strengthRef[pokeOne.type]) {
             newPokeAD = Math.floor(pokeOne.AD * 1.25);
             message = 'It was super effective!'
 
-            // if pokeOne is weak against PokeTwo
-        } else if (pokeTwo.type === weaknessRef[pokeOne.type]) {
+
+        } // if pokeOne is weak against PokeTwo, attack becomes less effective
+        else if (pokeTwo.type === weaknessRef[pokeOne.type]) {
             newPokeAD = Math.floor(pokeOne.AD * 0.75);
             message = 'It wasn\'t very effective ...'
         }
 
-        // if one of the pokemon has fainted
-        if (pokeOne.HP <= 0) {
-            return `Oh No! ${pokeOne} Fainted! ${this.trainerTwo.name} wins!!`;
-        }
-        else if (pokeTwo.HP <= 0) {
-            return `Oh No! ${pokeTwo} Fainted! ${this.trainerOne.name} wins!!`;
-        }
         // if both pokemon are awake, pokeOne attacks 
         if (pokeOne.HP > 0 && pokeTwo.HP > 0) {
             pokeTwo.HP = pokeTwo.HP - newPokeAD;
-            // if pokeTwo faints after being attacked 
 
+            // if pokeTwo faints after being attacked 
             if (pokeTwo.HP < 0) {
                 pokeTwo.HP = 0;
                 let pokeAttack = `${pokeOne.name} attacked ${pokeTwo.name} with ${pokeOne.move} and dealt ${newPokeAD} damage! ${message} ${pokeTwo.name} has ${pokeTwo.HP} HP left!!`
-                let pokeFaint = `Oh No! ${pokeTwo.name} Fainted! ${this.trainerOne.name} wins!!`;
+                let pokeFaint = `Oh No! ${pokeTwo.name} Fainted! ${pokeOne.trainer} wins!!`;
                 console.log(pokeAttack)
                 console.log(pokeFaint)
                 return pokeFaint;
             }
+            // if pokeTwo doesn't faint
             let pokeAttack = `${pokeOne.name} attacked ${pokeTwo.name} with ${pokeOne.move} and dealt ${newPokeAD} damage! ${message} ${pokeTwo.name} has ${pokeTwo.HP} HP left!!`
             console.log(pokeAttack)
             return pokeAttack;
         }
-        return pokeFaint
     }
-
 }
-
 module.exports = { Pokemon, Trainer, Battle };

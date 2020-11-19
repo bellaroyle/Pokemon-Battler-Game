@@ -1,6 +1,4 @@
-const { Pokemon,
-    Trainer,
-    Battle } = require('./pokemon.js')
+const { Pokemon, Trainer, Battle } = require('./pokemon.js')
 
 describe('Pokemon properties', () => {
     it('returns an object', () => {
@@ -101,7 +99,9 @@ describe('BATTLE TIME', () => {
     test('battle has property trainerOne and trainerTwo which are trainers', () => {
         const trainerOne = new Trainer('Bella');
         const trainerTwo = new Trainer('Sam');
-        const battleTime = new Battle(trainerOne, trainerTwo);
+        trainerOne.catch('charmander')
+        trainerTwo.catch('eevee')
+        const battleTime = new Battle(trainerOne, trainerTwo, 'charmander', 'eevee');
         expect(battleTime.trainerOne instanceof Trainer).toBe(true);
         expect(battleTime.trainerTwo instanceof Trainer).toBe(true);
     });
