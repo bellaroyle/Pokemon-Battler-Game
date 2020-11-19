@@ -97,12 +97,8 @@ function playGame() {
                     player2.catch(choosePoke(player1.pokeBelt[0]))
 
                     // prints confirmation to the player that the pokemon have been added to the respective pokeBelts and prints the pokemon's HP
-                    console.log(`${firstAnswers.pokemon} was added to ${player1.name}'s pokebelt`)
-                    console.log(`${firstAnswers.pokemon} has ${player1.pokeBelt[0].HP} HP and ${player1.pokeBelt[0].AD} AD!!`)
-                    console.log(`${player2.name} chose ${player2.pokeBelt[0].name}!!`)
-                    console.log(`${player2.pokeBelt[0].name} was added to ${player2.name}'s pokebelt`)
-                    console.log(`${player2.pokeBelt[0].name} has ${player2.pokeBelt[0].HP} HP and ${player2.pokeBelt[0].AD} AD!!`)
-
+                    console.log(`\n${firstAnswers.pokemon} was added to ${player1.name}'s pokebelt. \n${firstAnswers.pokemon} has ${player1.pokeBelt[0].HP} HP and ${player1.pokeBelt[0].AD} AD!!`)
+                    console.log(`\n${player2.name} chose ${player2.pokeBelt[0].name}!! \n${player2.pokeBelt[0].name} was added to ${player2.name}'s pokebelt. \n${player2.pokeBelt[0].name} has ${player2.pokeBelt[0].HP} HP and ${player2.pokeBelt[0].AD} AD!!\n`)
                     return [player1, player2, inquirer.prompt(wantToBattle)]
                 })
                 .then(([player1, player2, battleAnswer]) => {
@@ -113,8 +109,8 @@ function playGame() {
                         // if player answers yes when asked if they want to battle, the pokemon get sent out to battle
                         let poke1 = player1.pokeBelt[0]
                         let poke2 = player2.pokeBelt[0]
-                        console.log(`${player1.name} sent out ${poke1.name}. ${poke1.name} shouted ${poke1.sound}!!`)
-                        console.log(`${player2.name} sent out ${poke2.name}. ${poke2.name} shouted ${poke2.sound}!!`)
+                        console.log(`\n${player1.name} sent out ${poke1.name}. ${poke1.name} shouted ${poke1.sound}!!`)
+                        console.log(`\n${player2.name} sent out ${poke2.name}. ${poke2.name} shouted ${poke2.sound}!!\n`)
 
                         // battle arena is created 
                         const battle = new Battle(player1, player2, poke1.name, poke2.name)

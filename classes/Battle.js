@@ -24,6 +24,7 @@ class Battle {
         /* Takes two Pokemon as inputs -> the first input attacks the second input 
         and takes off a set amount of HP equal to attacking pokemon's AD.
         */
+        console.log(`\nIt's ${pokeOne.trainer}'s turn`)
 
         let newPokeAD = pokeOne.AD;
         let message = ''
@@ -48,7 +49,7 @@ class Battle {
             if (pokeTwo.HP < 0) {
                 pokeTwo.HP = 0;
                 let pokeAttack = `${pokeOne.name} attacked ${pokeTwo.name} with ${pokeOne.move} and dealt ${newPokeAD} damage! ${message} ${pokeTwo.name} has ${pokeTwo.HP} HP left!!`
-                let pokeFaint = `Oh No! ${pokeTwo.name} Fainted! ${pokeOne.trainer} wins!!`;
+                let pokeFaint = `\nOh No! ${pokeTwo.name} Fainted! ${pokeOne.trainer} wins!!\n`;
                 console.log(pokeAttack)
                 console.log(pokeFaint)
                 return pokeFaint;
