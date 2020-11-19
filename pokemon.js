@@ -42,6 +42,7 @@ class Battle {
         */
         this.trainerOne = trainerOne;
         this.trainerTwo = trainerTwo;
+
         this.pokeOne = trainerOne.pokeBelt.find(pokemon => {
             return pokemon.name === pokeOne;
         });
@@ -87,11 +88,13 @@ class Battle {
                 console.log(pokeFaint)
                 return pokeFaint;
             }
-            // if pokeTwo doesn't faint
+            // if pokeTwo is still awake
             let pokeAttack = `${pokeOne.name} attacked ${pokeTwo.name} with ${pokeOne.move} and dealt ${newPokeAD} damage! ${message} ${pokeTwo.name} has ${pokeTwo.HP} HP left!!`
             console.log(pokeAttack)
             return pokeAttack;
         }
     }
 }
+
+
 module.exports = { Pokemon, Trainer, Battle };
