@@ -96,5 +96,4 @@ class Battle {
     }
 }
 
-
 module.exports = { Pokemon, Trainer, Battle };
