@@ -1,40 +1,5 @@
-const { moveRef, typeRef, strengthRef, weaknessRef } = require('./ref-obj')
+const { strengthRef, weaknessRef } = require('../ref-obj')
 
-class Pokemon {
-    constructor(name) {
-        // this constructor creates a pokemon based on the name passed
-
-        this.name = name;
-        // creates a random integer between 25 and 30
-        this.HP = Math.floor(Math.random() * 10 + 25);
-        // creates a random integer between 6 and 10
-        this.AD = Math.floor(Math.random() * 5 + 6);
-        // sound will be the first 5 letters of name in capitals with a '!'
-        this.sound = `${name.slice(0, 6).toUpperCase()}!`;
-        // uses reference objects above 
-        this.type = typeRef[name];
-        this.move = moveRef[this.type];
-    }
-}
-class Trainer {
-    constructor(name) {
-        // create a trainer based on the name passed 
-        this.name = name;
-        this.pokeBelt = [];
-    }
-    catch(pokemon) {
-        /*
-        Takes a string representing the name of a pokemon and creates the pokemon.
-        Adds the created pokemon to the trainers pokebelt 
-        only allows for a maximum of 6 pokemon 
-         */
-        if (this.pokeBelt.length < 6) {
-            const newPoke = new Pokemon(pokemon)
-            this.pokeBelt.push(newPoke);
-        }
-        else return 'NO WAY PAL DON\'T GET GREEDY'
-    }
-}
 class Battle {
     constructor(trainerOne, trainerTwo, pokeOne, pokeTwo) {
         /* Takes two trainers and two strings representing one of the Pokemon in their respective belts
@@ -96,4 +61,4 @@ class Battle {
     }
 }
 
-module.exports = { Pokemon, Trainer, Battle };
+module.exports = Battle;

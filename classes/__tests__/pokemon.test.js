@@ -1,4 +1,6 @@
-const { Pokemon, Trainer, Battle } = require('./pokemon.js')
+const { Pokemon } = require('../Pokemon')
+const { Trainer } = require('../Trainer')
+const { Battle } = require('../Battle')
 
 describe('Pokemon properties', () => {
     it('returns an object', () => {

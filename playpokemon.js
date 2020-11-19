@@ -1,11 +1,10 @@
-'use strict';
-const { Trainer, Battle } = require('./pokemon');
+//'use strict';
+const { Trainer } = require('./classes/Trainer')
+const { Battle } = require('./classes/Battle')
 const { typeRef, weaknessRef } = require('./ref-obj')
 const inquirer = require('inquirer');
 
-console.log('IT\'S POKEMON!');
-
-
+console.log('IT\'S POKEMON TIME!');
 // array containing first 3 questions that the player will be asked in order to set up the game
 let firstQuestions = [
     {
