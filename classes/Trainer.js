@@ -1,3 +1,5 @@
+const Pokemon = require('./Pokemon')
+
 class Trainer {
     constructor(name) {
         // create a trainer based on the name passed 

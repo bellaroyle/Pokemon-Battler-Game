@@ -1,6 +1,6 @@
 //'use strict';
-const { Trainer } = require('./classes/Trainer')
-const { Battle } = require('./classes/Battle')
+const Trainer = require('./classes/Trainer')
+const Battle = require('./classes/Battle')
 const { typeRef, weaknessRef } = require('./ref-obj')
 const inquirer = require('inquirer');
 
