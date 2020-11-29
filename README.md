@@ -11,7 +11,7 @@
 
 Welcome to the wonderful world of Pokemon!
 
-This is a command line Pokemon battler game created using Object Oriented Programming in ES6 JavaScript to create trainers and their Pokemon. This was made using JavaScript, inquirer.js and 
+This is a command line Pokemon battler game created using Object Oriented Programming in ES6 JavaScript to create trainers and their Pokemon. This was made using JavaScript and inquirer.js.
 
 Each Pokemon and Trainer was created using Classes. The Pokemon class creates a Pokemon with properties Name, Hit Points(HP), Attack Damage(AD), Sound, Move, and Type when provided the name. The Trainer class creates a trainer with properties Name and Pokebelt, and has a method 'catch' which add Pokemon to the Pokebelt.
 
