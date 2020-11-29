@@ -79,7 +79,7 @@ const choosePoke = (poke1) => {
 
 function playGame() {
 
-    terminalImage.file('./media/pokemon-logo.png', { width: 150 })
+    terminalImage.file('./media/pokemon-logo.png', { width: 100 })
         .then((image) => {
             console.log(image)
         })

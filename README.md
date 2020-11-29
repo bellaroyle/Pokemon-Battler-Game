@@ -1,4 +1,13 @@
-## Pokemon Battle Game
+# Pokemon Battle Game
+
+## Table of Contents 
+- [About](#about)
+- [How to play](#how-to-play)
+- [Status](#status)
+- [Technologies used](#technologies-used)
+
+
+## About
 
 Welcome to the wonderful world of Pokemon!
 
@@ -13,11 +22,22 @@ Using inquirer.js, a command line method was implemented in order to establish a
 ## How to play:
 
 - Fork and clone this repository to your computer and open in your code editor. 
-- Run the following commands in your terminal:
+- Run the following commands in your terminal and have fun:
 ```
-npm install inquirer
-npm install terminal-image
+npm install 
 node playpokemon.js
 ```
-- Answer the initial questions to set up your trainers and pokemon and have fun!
 
+## Status
+
+This project is ongoing. It is ready to be played, however there is some extra functionality that I am working on to make the game even better:
+
+- The ability to catch and play with up to 6 pokemon in the game, and be able to switch between your pokemon when you want. Then the game would only be over when all of one players pokemon have fainted. 
+
+- A critical hit feature where randomly in the game a pokemon can do a critical hit on their opponent and inflict triple their usual damage. 
+
+## Technologies used
+
+- JavaScript ES6 - Object Oriented Programming
+- [Inquirer.js](https://www.npmjs.com/package/inquirer) - an npm promise-based package used to create Command Line Interface (CLI) tools for query based tasks.
+- Test-Driven Development (TDD) using [Jest](https://jestjs.io).
